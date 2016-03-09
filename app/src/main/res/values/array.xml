@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="country">
+        <item>USA</item>
+        <item>Euro</item>
+        <item>Singapore</item>
+        <item>Japan</item>
+        <item>Malaysia</item>
+        <item>Korea</item>
+        <item>China</item>
+        <item>Thai</item>
+        <item>Indian</item>
+        <item>Vietnamese</item>
+    </string-array>
+    <string-array name="codename">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>SGD</item>
+        <item>JPY</item>
+        <item>MYR</item>
+        <item>KRW</item>
+        <item>CNY</item>
+        <item>THB</item>
+        <item>INR</item>
+        <item>VND</item>
+    </string-array>
+
+</resources>

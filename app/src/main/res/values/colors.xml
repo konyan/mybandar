@@ -4,6 +4,7 @@
     <color name="colorPrimaryLight">#4db6ac</color>
     <color name="colorAccent">#ffc107</color>
     <color name="windowBackground">#424242</color>
+    <color name="tamplatBackground">#626262</color>
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="textColorSecondary">#80FFFFFF</color>
     <color name="textColorHint">#30FFFFFF</color>
