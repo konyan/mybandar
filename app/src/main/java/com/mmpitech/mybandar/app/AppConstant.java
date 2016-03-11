@@ -6,6 +6,7 @@ package com.mmpitech.mybandar.app;
 public class AppConstant {
 
     public static final String RATE = "rates";
+    public static final String TIME = "timestamp";
     public static final String USA = "USD";
     public static final String Euro = "EUR";
     public static final String Singapore = "SGD";
