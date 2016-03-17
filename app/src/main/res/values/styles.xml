@@ -6,6 +6,7 @@
 
 
     </style>
+
     <style name="MyTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -19,4 +20,16 @@
         <item name="android:windowBackground">@color/windowBackground</item>
     </style>
 
+
+    <style name="btn" parent="MyTheme.Base">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:background">@drawable/main_border</item>
+    </style>
+    <style name="btn2" parent="btn">
+        <item name="android:layout_weight">2</item>
+    </style>
 </resources>
