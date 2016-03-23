@@ -14,26 +14,29 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Bandar";
 
     //Table Name
-    public static final String TABLE_INCOME = "income";
-    public static final String TABLE_EXPENSE = "expense";
+    public static final String TABLE_BANDAR = "bandar";
+    public static final String TABLE_MONTH = "month";
 
-    //COLUMN NAME
+    //COLUMN NAME BANDAR
     public static final String COLUMN_ID = "id";
+    public static final String COLUMN_TYPE = "type";
     public static final String COLUMN_CATEGORY = "category";
     public static final String COLUMN_AMOUNT = "amount";
     public static final String COLUMN_NOTE = "note";
     public static final String COLUMN_DATE = "date";
 
+    //COLUMN MONTH
+    public static final String COLUMN_MONTH = "month";
+
     //Query
-    private String CREATE_TABLE_INCOME = "CREATE TABLE " + TABLE_INCOME + "(" +
-            COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_CATEGORY + " INT," +
+    private String CREATE_TABLE = "CREATE TABLE " + TABLE_BANDAR + "(" +
+            COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_TYPE + " INT," +
+            COLUMN_CATEGORY + " INT," +
             COLUMN_AMOUNT + " INT," + COLUMN_NOTE + " TEXT," +
             COLUMN_DATE + " DATE" + ")";
 
-    private String CREATE_TABLE_EXPENSE = "CREATE TABLE " + TABLE_EXPENSE + "(" +
-            COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_CATEGORY + " INT," +
-            COLUMN_AMOUNT + " INT," + COLUMN_NOTE + " TEXT," +
-            COLUMN_DATE + " DATE" + ")";
+    private String CREATE_MONTH_TABLE = "CREATE TABLE " + TABLE_MONTH + "(" + COLUMN_ID +
+            " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_MONTH + " INT )";
 
 
     public DBHelper(Context context) {
@@ -42,14 +45,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_INCOME);
-        db.execSQL(CREATE_TABLE_EXPENSE);
+        db.execSQL(CREATE_TABLE);
+        db.execSQL(CREATE_MONTH_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_EXPENSE);
-        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_INCOME);
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_MONTH_TABLE);
 
         // Create tables again
         onCreate(db);

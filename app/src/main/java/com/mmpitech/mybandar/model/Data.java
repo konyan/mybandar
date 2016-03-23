@@ -10,11 +10,15 @@ public class Data {
 
     private int category;
     private int amount;
+    private int type;
     private Date date;
     private String note;
 
+    public Data() {
+    }
 
-    public Data(int category, int amount, Date date, String note) {
+    public Data(int type,int category, int amount, Date date, String note) {
+        this.type = type;
         this.category = category;
         this.amount = amount;
         this.date = date;
@@ -51,5 +55,13 @@ public class Data {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

@@ -43,7 +43,6 @@ public class CurrencyAdapter extends ArrayAdapter{
 
         ViewHolder holder;
         Currency c = currencies.get(position);
-        Log.d("mylog","C : " + c.getPrice());
         if(v == null){
 
             v = inflater.inflate(R.layout.currency_row,parent,false);

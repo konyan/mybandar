@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--<color name="colorPrimary">#455A64</color>-->
+    <!--<color name="colorPrimaryLight">#263238</color>-->
+    <!--<color name="colorAccent">#009688</color>-->
+    <!--<color name="windowBackground">#F5f5f5</color>-->
+    <!--<color name="templateBackground">#FFFFFF</color>-->
+    <!--<color name="textColorPrimary">#FFFFFF</color>-->
+    <!--<color name="textColorSecondary">#80FFFFFF</color>-->
+    <!--<color name="textColorHint">#30FFFFFF</color>-->
+    <!--<color name="textColorDivider">#15FFFFFF</color>-->
+
+
+
+    <!--<color name="text_black_87">#de000000</color>-->
+
     <color name="colorPrimary">#009688</color>
-    <color name="colorPrimaryLight">#4db6ac</color>
-    <color name="colorAccent">#ffc107</color>
-    <color name="windowBackground">#424242</color>
-    <color name="tamplatBackground">#626262</color>
-    <color name="textColorPrimary">#FFFFFF</color>
-    <color name="textColorSecondary">#80FFFFFF</color>
-    <color name="textColorHint">#30FFFFFF</color>
+    <color name="colorPrimaryLight">#00796B</color>
+    <color name="colorAccent">#7C4DFF</color>
+    <color name="windowBackground">#F5f5f5</color>
+    <color name="templateBackground">#FFFFFF</color>
+    <color name="textColorPrimary">#DE000000</color>
+    <color name="textColorSecondary">#87000000</color>
+    <color name="textColorHint">#30000000</color>
+    <color name="textColorDivider">#15000000</color>
+    <color name="btn_border">#FFC107</color>
+    <color name="text_black_87">#de000000</color>
 </resources>
+

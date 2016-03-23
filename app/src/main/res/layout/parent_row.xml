@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/_56sdp"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/imgExp"
+        android:src="@drawable/arrow_down"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true" />
+
+    <RelativeLayout
+        android:layout_toRightOf="@+id/imgExp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgCategory"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:src="@mipmap/ic_beer" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_56sdp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="Salary"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgCount"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/txtCategory"
+                android:src="@mipmap/ic_beer" />
+
+            <TextView
+                android:id="@+id/txtTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="350,000ks"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="16sp" />
+
+            <com.daimajia.numberprogressbar.NumberProgressBar
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtCategory"
+                android:layout_marginRight="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                custom:progress_curent="80"
+                custom:progress_max="100"
+                custom:progress_reached_bar_height="3dp"
+                custom:progress_reached_color="#3498DB"
+                custom:progress_text_color="@color/textColorPrimary"
+                custom:progress_text_offset="1dp"
+                custom:progress_text_size="18sp"
+                custom:progress_text_visibility="visible"
+                custom:progress_unreached_bar_height="1.5dp"
+                custom:progress_unreached_color="@color/textColorPrimary" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

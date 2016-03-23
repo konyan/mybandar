@@ -2,9 +2,10 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:layout_margin="8dp"
-    card_view:cardBackgroundColor="@color/tamplatBackground"
+    android:layout_height="@dimen/_56sdp"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/_8sdp"
+    card_view:cardBackgroundColor="@color/templateBackground"
     card_view:cardCornerRadius="5dp"
     card_view:cardElevation="5dp"
     card_view:cardPreventCornerOverlap="false">
@@ -13,38 +14,37 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/main_border">
+        android:layout_gravity="center"
+        android:background="@drawable/main_border"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/imgNation"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="8dp"
-            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_8sdp"
             android:src="@mipmap/currency_usa" />
 
         <TextView
-            android:layout_marginLeft="56dp"
             android:id="@+id/txtNation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_56sdp"
             android:layout_toRightOf="@+id/imgNation"
-            android:gravity="center"
             android:text="USD"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/txtPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/txtNation"
-            android:gravity="center"
-            android:text="1,220" />
+            android:layout_marginRight="@dimen/_16sdp"
+            android:text="1,220"
+            android:textSize="18sp" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

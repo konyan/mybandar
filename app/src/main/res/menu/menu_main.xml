@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="lecho.lib.hellocharts.samples.PieChartActivity">
+
+    <item
+        android:id="@+id/action_toggle_labels_outside"
+        android:title="Toggle labels outside"
+        app:showAsAction="never" />
+
+</menu>
