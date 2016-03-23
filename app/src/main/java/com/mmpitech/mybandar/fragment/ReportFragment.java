@@ -1,6 +1,8 @@
 package com.mmpitech.mybandar.fragment;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -62,7 +64,7 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
     private boolean hasLabelForSelected = false;
 
 
-    private int totalExpanseByMonth;
+    private int totalExpanseByMonth, totalIncomeByMonth;
 
     public ReportFragment() {
     }
@@ -82,11 +84,7 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
 
         flipper = (AdapterViewFlipper) v.findViewById(R.id.flipper);
 
-        try {
-            flipper.setAdapter(new MyFlipperAdapter(getActivity(), monthArray(removeDuplicateItem())));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
         imgNext = (ImageView) v.findViewById(R.id.imgNext);
         imgNext.setOnClickListener(this);
         imgPre = (ImageView) v.findViewById(R.id.imgPre);
@@ -113,7 +111,7 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
             ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
 // generate random color
             int color = generator.getRandomColor();
-            SliceValue sliceValue = new SliceValue((float) (p.getAmount() * 100) / totalType(1), color);
+            SliceValue sliceValue = new SliceValue((float) (p.getAmount() * 100) / totalExpanseByMonth(1), color);
             values.add(sliceValue);
 
         }
@@ -127,7 +125,7 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
         Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
 
         //Text1
-        data.setCenterText1(totalType(0) + "Ks");
+        data.setCenterText1(totalIncomeByMonth + "Ks");
         data.setCenterText1Color(getActivity().getResources().getColor(R.color.colorPrimary));
         data.setCenterText1Typeface(tf);
         data.setCenterText1FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
@@ -154,7 +152,14 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
         }
         chart.setCircleFillRatio(0.7f);
 
-        generateData(AppConstant.MONTHNAMES[(monthArray(removeDuplicateItem())[0] - 1)]);
+        if (monthArray(removeDuplicateItem()).length != 0) {
+            generateData(AppConstant.MONTHNAMES[(monthArray(removeDuplicateItem())[0] - 1)]);
+            imgNext.setVisibility(View.VISIBLE);
+            imgPre.setVisibility(View.VISIBLE);
+        } else {
+            imgNext.setVisibility(View.GONE);
+            imgPre.setVisibility(View.GONE);
+        }
 
     }
 
@@ -162,36 +167,50 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         if (v.getId() == R.id.imgNext) {
+            totalExpanseByMonth = 0;
+            totalIncomeByMonth = 0;
             try {
                 int[] month = monthArray(removeDuplicateItem());
-//                for(int i=0 ; i < month.length ; i++){
-//
-//                }
-                Log.d("mylog", "Child :" + flipper.getDisplayedChild());
                 if (flipper.getDisplayedChild() < month.length - 1) {
-
-                    Log.d("mylog", "Month :" + month[flipper.getDisplayedChild() + 1]);
-                    String m = AppConstant.MONTHNAMES[month[flipper.getDisplayedChild() + 1]-1];
-
+                    String m = AppConstant.MONTHNAMES[month[flipper.getDisplayedChild() + 1] - 1];
                     generateData(m);
                 } else {
-
-                    Log.d("mylog", "Month :" + month[flipper.getDisplayedChild()]);
                     String m = AppConstant.MONTHNAMES[(monthArray(removeDuplicateItem())[0] - 1)];
-                    Log.d("mylog","String MOnth :" + m);
                     generateData(m);
 
                 }
+                txtNet.setText("Net = " + (totalIncomeByMonth - totalExpanseByMonth) + " Ks");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             flipper.showNext();
             flipper.stopFlipping();
         }
-//        if (v.getId() == R.id.imgPre) {
-//            flipper.showPrevious();
-//            flipper.stopFlipping();
-//        }
+        if (v.getId() == R.id.imgPre) {
+            totalExpanseByMonth = 0;
+            totalIncomeByMonth = 0;
+            try {
+                int[] month = monthArray(removeDuplicateItem());
+                Log.d("mylog", "Child :" + flipper.getDisplayedChild());
+                if (flipper.getDisplayedChild() == 0) {
+                    Log.d("mylog", "I am " + month[flipper.getCount() - 1]);
+                    String m = AppConstant.MONTHNAMES[month[flipper.getCount() - 1] - 1];
+                    Log.d("mylog", "Month :" + m);
+                    generateData(m);
+                } else {
+                    Log.d("mylog", "I am " + month[flipper.getDisplayedChild() - 1]);
+                    String m = AppConstant.MONTHNAMES[month[flipper.getDisplayedChild() - 1] - 1];
+                    Log.d("mylog", "Month :" + m);
+                    generateData(m);
+                }
+                txtNet.setText("Net = " + (totalIncomeByMonth - totalExpanseByMonth) + " Ks");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            flipper.showPrevious();
+            flipper.stopFlipping();
+        }
 
     }
 
@@ -250,34 +269,56 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
                 Log.d("mylog", "Date :" + totalExpanseByMonth);
             }
         }
+
+        totalAountForIncome(realMonth);
         return parentDatas;
     }
 
-    private int totalExpanseByMonth(int amount){
+    private int totalExpanseByMonth(int amount) {
 
-        totalExpanseByMonth = totalExpanseByMonth+amount;
+        totalExpanseByMonth = totalExpanseByMonth + amount;
         return totalExpanseByMonth;
 
     }
 
-    private int totalType(int type) {
+    private int totalAountForIncome(String incomeMonth) {
 
-        return new DBAdapter(getActivity()).getTotalAmount(type);
+        try {
+            List<ParentData> parentDataList = new DBAdapter(getActivity()).getTotalAmountForIncome();
+            for (ParentData p : parentDataList) {
+                String m = AppConstant.formatToMonthFullName.format(p.getDate());
+                if (m.equals(incomeMonth)) {
+                    totalIncomeByMonth = totalIncomeByMonth + p.getAmount();
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return totalIncomeByMonth;
+
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("mylog", "Rsu");
+        totalExpanseByMonth = 0;
+        totalIncomeByMonth = 0;
         try {
+            flipper.setAdapter(new MyFlipperAdapter(getActivity(), monthArray(removeDuplicateItem())));
             toggleLabelsOutside();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        txtNet.setText("Net = " + (totalType(0) - totalType(1)) + " Ks");
+
+        txtNet.setText("Net = " + (totalIncomeByMonth - totalExpanseByMonth) + " Ks");
 
 
     }
+
+
 
     private List<String> dateToString() throws ParseException {
         List<Date> dates = new DBAdapter(getActivity()).getGroupDate();
@@ -317,6 +358,18 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
         }
         Arrays.sort(monthArray);
         return monthArray;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.d("mylog", "OnAttach");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("mylog", "onDetach");
     }
 }
 

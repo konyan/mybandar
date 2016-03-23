@@ -161,6 +161,7 @@ public class DataEntry extends AppCompatActivity implements View.OnClickListener
                     TSnackbar snackbar = TSnackbar.make(findViewById(android.R.id.content), "Category =" + categoryName, TSnackbar.LENGTH_SHORT);
                     snackbar.setActionTextColor(Color.BLACK);
 
+
                     if (type == 0) {
 
                         snackbar.addIcon(AppConstant.INCOME[id_], 196);
@@ -174,8 +175,6 @@ public class DataEntry extends AppCompatActivity implements View.OnClickListener
                     textView.setGravity(Gravity.CENTER);
                     textView.setTextSize(20);
 
-                    Toast.makeText(DataEntry.this, "Category :" + id_, Toast.LENGTH_LONG).show();
-
                     CircleImageView c = (CircleImageView) v;
                     c.setBorderWidth(3);
                     c.setBorderColor(getResources().getColor(R.color.colorAccent));
@@ -187,9 +186,16 @@ public class DataEntry extends AppCompatActivity implements View.OnClickListener
                         rlCategory.removeAllViewsInLayout();
                         createCategory(type);
 
-                        L.m("i am here");
                     }
                     snackbar.show();
+                    if (snackbar.isShown()) {
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        snackbar.dismiss();
+                    }
 
                     L.m("Key :" + hashMap.get(AppConstant.ID));
                 }

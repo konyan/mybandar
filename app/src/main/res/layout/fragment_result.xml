@@ -41,14 +41,4 @@
         android:dividerHeight="1dp"
         android:groupIndicator="@null" />
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-    <!--android:id="@+id/fabClick"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="end|bottom"-->
-    <!--android:layout_marginBottom="@dimen/_16sdp"-->
-    <!--android:layout_marginRight="@dimen/_16sdp"-->
-    <!--android:src="@android:drawable/ic_dialog_email" />-->
-
-
 </RelativeLayout>

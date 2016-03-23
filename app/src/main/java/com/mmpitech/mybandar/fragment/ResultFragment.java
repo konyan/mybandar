@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.mmpitech.mybandar.R;
 import com.mmpitech.mybandar.adapter.DBAdapter;
@@ -36,11 +37,11 @@ public class ResultFragment extends Fragment {
     private List<ParentData> mParentList;
     private HashMap<ParentData, List<ChildData>> mChild;
     private MyExpandAdapter adapter;
-
+    private TextView txtDate;
     int totalExpanse = 0;
     int totalIncome = 0;
 
-    private int width,height;
+    private int width, height;
 
     public ResultFragment() {
 
@@ -51,19 +52,9 @@ public class ResultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        DisplayMetrics metrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-         width = metrics.widthPixels;
 
         View v = inflater.inflate(R.layout.fragment_result, null);
 
-        L.m("Total Income/Expanse :" + totalIncome +"/"+totalExpanse);
-//        try {
-//            Log.d("mylog", "Child :" + dbAdapter.getChildData(1));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
         initialize(v);
         return v;
     }
@@ -78,6 +69,7 @@ public class ResultFragment extends Fragment {
         totalExpanse = new DBAdapter(getActivity()).getTotalAmount(1);
         totalIncome = new DBAdapter(getActivity()).getTotalAmount(0);
 
+        txtDate = (TextView)v.findViewById(R.id.txtDate);
         adapter = new MyExpandAdapter(getActivity(), mParentList, mChild, totalExpanse, totalIncome);
 
         expandableListView = (MyAnimateExpandableListView) v.findViewById(R.id.lvExp);
@@ -102,9 +94,9 @@ public class ResultFragment extends Fragment {
         mParentList = new DBAdapter(getActivity()).getParentData();
         mChild = new HashMap<ParentData, List<ChildData>>();
 
-        for(int i=0; i< mParentList.size() ; i++){
+        for (int i = 0; i < mParentList.size(); i++) {
             ParentData p = mParentList.get(i);
-            mChild.put(p,new DBAdapter(getActivity()).getChildData(p.getCategory()));
+            mChild.put(p, new DBAdapter(getActivity()).getChildData(p.getCategory()));
         }
 
     }
@@ -126,7 +118,6 @@ public class ResultFragment extends Fragment {
         expandableListView.setAdapter(adapter);
         Log.d("mylog", "I am resume.");
     }
-
 
 
 }

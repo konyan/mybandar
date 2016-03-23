@@ -165,20 +165,38 @@ public class DBAdapter {
         return childDatas;
     }
 
-    public int getTotalAmount(int type) {
+    public List<ParentData> getTotalAmountForIncome() throws ParseException {
 
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        List<ParentData> parents = new ArrayList<ParentData>();
+
+        String query = "SELECT " + dbHelper.COLUMN_AMOUNT + " AS totalExpense," + dbHelper.COLUMN_DATE + " FROM " + dbHelper.TABLE_BANDAR + " WHERE " + dbHelper.COLUMN_TYPE + "=0";
+        Cursor c = db.rawQuery(query, null);
+        Log.d("mylog", "Cursor :" + c.getCount());
+        if (c.moveToFirst()) {
+            do {
+                ParentData p = new ParentData();
+                p.setAmount(c.getInt(0));
+                p.setDate(AppConstant.formatter.parse(c.getString(1)));
+
+                parents.add(p);
+
+            } while (c.moveToNext());
+        }
+        return parents;
+    }
+
+    public int getTotalAmount(int type){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         int result = 0;
 
-        String query = "SELECT SUM(" + dbHelper.COLUMN_AMOUNT + ") AS totalExpense," + dbHelper.COLUMN_DATE + " FROM " + dbHelper.TABLE_BANDAR + " WHERE " + dbHelper.COLUMN_TYPE + "=" + type;// +" GROUP BY STRFTIME('%m',"+dbHelper.COLUMN_DATE+") = '03'";
+        String query = "SELECT SUM(" + dbHelper.COLUMN_AMOUNT + ") AS totalExpense FROM " + dbHelper.TABLE_BANDAR + " WHERE " + dbHelper.COLUMN_TYPE + "="+type;
         Cursor c = db.rawQuery(query, null);
         Log.d("mylog", "Cursor :" + c.getCount());
         if (c.moveToFirst()) {
             do {
 
                 result = c.getInt(0);
-                Log.d("mylog", "Result" + result);
-                Log.d("mylog", "Result" + c.getString(1));
 
             } while (c.moveToNext());
         }
