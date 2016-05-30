@@ -62,6 +62,7 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
     private boolean hasLabelsOutside = false;
     private boolean hasCenterCircle = true;
     private boolean hasLabelForSelected = false;
+    private String globalMonth;
 
 
     private int totalExpanseByMonth, totalIncomeByMonth;
@@ -153,7 +154,9 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
         chart.setCircleFillRatio(0.7f);
 
         if (monthArray(removeDuplicateItem()).length != 0) {
-            generateData(AppConstant.MONTHNAMES[(monthArray(removeDuplicateItem())[0] - 1)]);
+            String m = AppConstant.MONTHNAMES[(monthArray(removeDuplicateItem())[0] - 1)];
+            globalMonth = m;
+            generateData(m);
             imgNext.setVisibility(View.VISIBLE);
             imgPre.setVisibility(View.VISIBLE);
         } else {
@@ -173,9 +176,11 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
                 int[] month = monthArray(removeDuplicateItem());
                 if (flipper.getDisplayedChild() < month.length - 1) {
                     String m = AppConstant.MONTHNAMES[month[flipper.getDisplayedChild() + 1] - 1];
+                    globalMonth = m;
                     generateData(m);
                 } else {
                     String m = AppConstant.MONTHNAMES[(monthArray(removeDuplicateItem())[0] - 1)];
+                    globalMonth = m;
                     generateData(m);
 
                 }
@@ -195,11 +200,13 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
                 if (flipper.getDisplayedChild() == 0) {
                     Log.d("mylog", "I am " + month[flipper.getCount() - 1]);
                     String m = AppConstant.MONTHNAMES[month[flipper.getCount() - 1] - 1];
+                    globalMonth = m;
                     Log.d("mylog", "Month :" + m);
                     generateData(m);
                 } else {
                     Log.d("mylog", "I am " + month[flipper.getDisplayedChild() - 1]);
                     String m = AppConstant.MONTHNAMES[month[flipper.getDisplayedChild() - 1] - 1];
+                    globalMonth = m;
                     Log.d("mylog", "Month :" + m);
                     generateData(m);
                 }
@@ -224,8 +231,8 @@ public class ReportFragment extends Fragment implements View.OnClickListener {
             int pos = 0;
             int amount = 0;
             try {
-                pos = generateDataFromDb("March").get(arcIndex).getCategory();
-                amount = generateDataFromDb("March").get(arcIndex).getAmount();
+                pos = generateDataFromDb(globalMonth).get(arcIndex).getCategory();
+                amount = generateDataFromDb(globalMonth).get(arcIndex).getAmount();
             } catch (ParseException e) {
                 e.printStackTrace();
             }

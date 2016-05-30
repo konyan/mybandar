@@ -277,6 +277,7 @@ public class DataEntry extends AppCompatActivity implements View.OnClickListener
             data.setAmount(Integer.parseInt(amount));
             try {
                 data.setDate(AppConstant.formatter.parse(date));
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }

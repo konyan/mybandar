@@ -15,7 +15,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Table Name
     public static final String TABLE_BANDAR = "bandar";
-    public static final String TABLE_MONTH = "month";
 
     //COLUMN NAME BANDAR
     public static final String COLUMN_ID = "id";
@@ -35,8 +34,8 @@ public class DBHelper extends SQLiteOpenHelper {
             COLUMN_AMOUNT + " INT," + COLUMN_NOTE + " TEXT," +
             COLUMN_DATE + " DATE" + ")";
 
-    private String CREATE_MONTH_TABLE = "CREATE TABLE " + TABLE_MONTH + "(" + COLUMN_ID +
-            " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_MONTH + " INT )";
+//    private String CREATE_MONTH_TABLE = "CREATE TABLE " + TABLE_MONTH + "(" + COLUMN_ID +
+//            " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_MONTH + " INT )";
 
 
     public DBHelper(Context context) {
@@ -46,15 +45,12 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
-        db.execSQL(CREATE_MONTH_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + CREATE_MONTH_TABLE);
 
-        // Create tables again
         onCreate(db);
     }
 }
